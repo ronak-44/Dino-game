@@ -1,0 +1,87 @@
+
+.center-box {
+  display: flex;
+  justify-content: center; 
+    width: 650px;
+    height: 300px;
+    /* background-color: white;  */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid black; 
+  }
+  
+
+.dino-image {
+    position: absolute;
+    width: 40px; 
+    height: 45px;
+    bottom: 23px;
+    left: 20px;
+    /* transition: bottom 1s, left 1s; */
+  }
+
+  .ground-image {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    height: 15%;
+  }
+
+  .cloud-image {
+    position: absolute;
+    top: 80px;
+    /* width: 100%; */
+    /* height: 15%; */
+
+  }
+
+  .obstacle-image {
+    position: absolute;
+    bottom: 20px;
+    left: 300px;
+    width: 30px;
+    height: 25px;
+  }
+
+.startButton {
+  position: absolute;
+  top: 75%;
+  left: 46%;
+  width: 60px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+
+.restartButton {
+  position: absolute;
+  top: 75%;
+  left: 54%;
+  width: 60px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.score {
+  position: absolute;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: bold;
+  top: 15px;
+  
+}
+
+.game-over {
+  position: absolute;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: bold;
+  top: 40px;
+  
+}
