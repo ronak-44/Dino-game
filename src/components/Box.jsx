@@ -15,13 +15,24 @@ function Box() {
   const [intervalId, setIntervalId] = useState(null);
   const [isRunning, setisRunning] = useState(false);
   const [obstaclePosition, setObstaclePosition] = useState({ left: 325, bottom: 23 });
+
+  const handleUpdateObstaclePosition = (newLeftPosition) => {
+    setObstaclePosition(prevState => ({
+      ...prevState,
+      left: newLeftPosition
+    }));
+  };
+
   const [collisionDetected, setCollisionDetected] = useState(false);
-  const [score,setScore] = useState(-1)
+  const [score, setScore] = useState(-1)
+
+
+
 
   const [position, setPosition] = useState({
     bottom: 23,
     left: 10,
-    dinoImage: dino
+    dinoImage: dino,
   });
 
   const dinoWidth = 40;
@@ -34,6 +45,7 @@ function Box() {
     if (!collisionDetected && checkCollision(obstaclePosition, obstacleWidth, obstacleHeight, position, dinoWidth, dinoHeight)) {
       console.log('Collision detected!');
       setCollisionDetected(true);
+      // setisRunning(false)
       clearInterval(intervalId);
       setPosition(prevPosition => {
         return {
@@ -47,7 +59,7 @@ function Box() {
   }, [obstaclePosition, position, collisionDetected]);
 
   function checkCollision(obstaclePos, obstacleWidth, obstacleHeight, dinoPos, dinoWidth, dinoHeight) {
-    setScore(score+1)
+    setScore(score + 1)
     const threshold = 20;
 
     // Calculate bounding box coordinates for obstacle
@@ -89,7 +101,7 @@ function Box() {
     setPosition({
       left: 10,
       dinoImage: dino,
-      bottom: 23
+      bottom: 23,
     })
   }
 
@@ -97,6 +109,9 @@ function Box() {
   // useEffect(() => {
   //   console.log(intervalId);
   // }, [intervalId]);
+
+
+
 
 
   function startGame() {
@@ -169,15 +184,21 @@ function Box() {
       <div className='center-box' >
         <p className='score'>Score : {score}</p>
         {collisionDetected && <h1 className='game-over'>Game Over </h1>}
+        {/* <div className='image-wrapper'><img src={cloud} alt="Cloud" className="cloud-image" /></div> */}
+        <img src={cloud} alt="Cloud"
+          className={`cloud-image ${isRunning && !collisionDetected ? 'animate' : ''}`}
+        />
         <img
           src={position.dinoImage}
           alt="Dinosaur"
           className="dino-image"
           style={{ left: `${position.left}px`, bottom: `${position.bottom}px` }}
         />
+
         <img src={ground} alt="Ground" className="ground-image" />
-        <img src={cloud} alt="Cloud" className="cloud-image" />
-        <Obstacle position={position} />
+
+
+        <Obstacle position={position} obstaclePosition={obstaclePosition} onUpdateObstaclePosition={handleUpdateObstaclePosition}/>
 
       </div>
       <button type="button" className="btn btn-dark startButton" onClick={startGame} disabled={isRunning}>
