@@ -169,7 +169,10 @@ function Box() {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.code === 'Space') {
+      if(collisionDetected){
+        window.removeEventListener('keydown', handleKeyDown);
+      }
+      else if (isRunning && event.code === 'Space') {
         jump();
       }
     };
@@ -177,7 +180,7 @@ function Box() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [intervalId]);
+  }, [intervalId,collisionDetected]);
 
   return (
     <div>
