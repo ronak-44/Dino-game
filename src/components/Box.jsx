@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Box.css';
 import dino from '../images/dinosaur.png';
 import dino_left from '../images/dinosaur_left.png';
@@ -15,6 +15,12 @@ function Box() {
   const [intervalId, setIntervalId] = useState(null);
   const [isRunning, setisRunning] = useState(false);
   const [obstaclePosition, setObstaclePosition] = useState({ left: 325, bottom: 23 });
+
+  const [difficulty,setDifficulty] = useState(10);
+  const difficultyRef = useRef(difficulty);
+  useEffect(() => {
+    difficultyRef.current = difficulty;
+  }, [difficulty]);
 
   const handleUpdateObstaclePosition = (newLeftPosition) => {
     setObstaclePosition(prevState => ({
@@ -94,10 +100,12 @@ function Box() {
 
 
   function restartGame() {
+    setDifficulty(10)
     setisRunning(false)
     clearInterval(intervalId);
     setCollisionDetected(false);
     setScore(-1)
+    setObstaclePosition({ left: 325, bottom: 23 })
     setPosition({
       left: 10,
       dinoImage: dino,
@@ -125,6 +133,7 @@ function Box() {
           //   ...prevPosition,
           //   dinoImage: dino_dead,
           // };
+          setDifficulty(difficultyRef.current + 1);
           return {
             ...prevPosition,
             left: 10,
@@ -134,7 +143,7 @@ function Box() {
 
         return {
           ...prevPosition,
-          left: prevPosition.left + 10,
+          left: prevPosition.left + difficultyRef.current,
           dinoImage: prevPosition.dinoImage === dino_right ? dino_left : dino_right,
         };
       });
