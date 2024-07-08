@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM node:lts-alpine as build
+FROM --platform=linux/amd64 node:lts-alpine as build
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install

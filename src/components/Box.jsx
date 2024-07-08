@@ -8,6 +8,8 @@ import dino_dead from '../images/dinosaur_die.png';
 import ground from '../images/ground.png';
 import cloud from '../images/cloud.png';
 import Obstacle from './Obstacle';
+import Leaderboard from './Leaderboard';
+
 
 
 function Box() {
@@ -195,7 +197,8 @@ function Box() {
     <div>
       <div className='center-box' >
         <p className='score'>Score : {score}</p>
-        {collisionDetected && <h1 className='game-over'>Game Over </h1>}
+        {/* {collisionDetected && <h1 className='game-over'>Game Over </h1>} */}
+        {collisionDetected && <Leaderboard score={score}/>}
         {/* <div className='image-wrapper'><img src={cloud} alt="Cloud" className="cloud-image" /></div> */}
         <img src={cloud} alt="Cloud"
           className={`cloud-image ${isRunning && !collisionDetected ? 'animate' : ''}`}
